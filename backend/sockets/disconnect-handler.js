@@ -34,7 +34,7 @@ module.exports.disconnectHandler = (io, socket, boardId, roomId, name) => () => 
       delete boards[boardId]
     }
   } catch (error) {
-    console.warn('Could complete cleanup on socket disconnect', {boardId, roomId, socketId: socket.id})
+    console.warn('Could not complete cleanup on socket disconnect', {boardId, roomId, socketId: socket.id})
     console.error(error)
   }
 }
