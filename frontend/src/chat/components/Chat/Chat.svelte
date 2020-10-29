@@ -11,9 +11,9 @@
 
 	export let chatFactory: (settings: ChatSettings) => ChatController
 	export let roomId: string
-  export let name: string
-  export let token: string
-  export let boardId: string
+	export let name: string
+	export let token: string
+	export let boardId: string
 
 	let newMessageText: string = ''
 
