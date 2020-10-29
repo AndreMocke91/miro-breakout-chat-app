@@ -12,7 +12,7 @@ const initApp = (roomId: string, name: string, token: string, boardId: string) =
 			name,
 			chatFactory: socketioControllerFactory,
 			token,
-			boardId
+			boardId,
 		},
 	})
 }

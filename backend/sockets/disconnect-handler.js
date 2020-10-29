@@ -18,23 +18,23 @@ const {boards} = require('../boards/boards')
  */
 
 module.exports.disconnectHandler = (io, socket, boardId, roomId, name) => () => {
-  io.to(roomId).emit('system message', `${name} left ${roomId}`)
-  console.log(`${name} left ${roomId}`)
+	io.to(roomId).emit('system message', `${name} left ${roomId}`)
+	console.log(`${name} left ${roomId}`)
 
-  try {
-    delete boards[boardId][roomId].sockets[socket.id]
+	try {
+		delete boards[boardId][roomId].sockets[socket.id]
 
-    const roomSockets = boards[boardId][roomId].sockets
-    if (!Object.keys(roomSockets).length) {
-      delete boards[boardId][roomId]
-    }
+		const roomSockets = boards[boardId][roomId].sockets
+		if (!Object.keys(roomSockets).length) {
+			delete boards[boardId][roomId]
+		}
 
-    const boardRooms = boards[boardId]
-    if(!Object.keys(boardRooms).length){
-      delete boards[boardId]
-    }
-  } catch (error) {
-    console.warn('Could not complete cleanup on socket disconnect', {boardId, roomId, socketId: socket.id})
-    console.error(error)
-  }
+		const boardRooms = boards[boardId]
+		if (!Object.keys(boardRooms).length) {
+			delete boards[boardId]
+		}
+	} catch (error) {
+		console.warn('Could not complete cleanup on socket disconnect', {boardId, roomId, socketId: socket.id})
+		console.error(error)
+	}
 }
