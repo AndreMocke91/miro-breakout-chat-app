@@ -1,18 +1,14 @@
 <script lang="ts">
-	import {onMount, afterUpdate} from 'svelte'
+	import {onMount} from 'svelte'
 	import Message from './Message.svelte'
 
-	import type {
-		MessageHandler,
-		EmitHandler,
-		Message as MessageInterface,
-		ChatController,
-		ChatSettings,
-	} from '../../interfaces/chat'
+	import type {MessageHandler, Message as MessageInterface, ChatController, ChatSettings} from '../../interfaces/chat'
 
 	export let chatFactory: (settings: ChatSettings) => ChatController
 	export let roomId: string
 	export let name: string
+	export let token: string
+	export let boardId: string
 
 	let newMessageText: string = ''
 
@@ -34,7 +30,7 @@
 	}
 
 	onMount(() => {
-		chatController = chatFactory({roomId, name, messageHandler: handleNewMessage})
+		chatController = chatFactory({roomId, name, messageHandler: handleNewMessage, token, boardId})
 	})
 </script>
 
@@ -69,9 +65,7 @@
 </style>
 
 <div class="sidebar__container">
-	<div class="sidebar__header">
-		<span class="miro-h2">Breakout Chat</span>
-	</div>
+	<div class="sidebar__header"><span class="miro-h2">Breakout Chat</span></div>
 	<div class="sidebar__body">
 		{#each messages as message}
 			<Message {message} />
